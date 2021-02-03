@@ -181,19 +181,19 @@ class Amazon():
 
 
 if __name__ == "__main__":
-    print("please enter what you want to search:")
-    user_input = input()
+    #print("please enter what you want to search:")
+    #user_input = input()
 
     Flipkart = Flipkart()
-    Flipkart.page_load(user_input)
+    Flipkart.page_load("mobiles")
     Flipkart.create_csv_file()
     Flipkart.data_scrap()
     Flipkart.tearDown()
     time.sleep(2)
     Amazon = Amazon()
-    Amazon.page_load(user_input)
+    Amazon.page_load("mobiles")
     Amazon.create_csv_file()
-    Amazon.data_scrap(user_input)
+    Amazon.data_scrap("mobiles")
     Amazon.tearDown()
 
     reader = csv.reader(open("Flipkart_output.csv"))
