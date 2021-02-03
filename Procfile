@@ -1,1 +1,1 @@
-worker: python flipkart.py
+"web: python app.py" 
