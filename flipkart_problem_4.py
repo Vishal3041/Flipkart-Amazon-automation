@@ -38,7 +38,7 @@ class Flipkart():
         category = user_search
 
         #only considered for 2 pages because of memory and time it takes to process the pages
-        while condition <= 1:
+        while condition <= 2:
             all_products_link = self.driver.find_elements_by_class_name('_2kHMtA')
             for link in all_products_link:
                 description_of_all.append(link.find_element_by_class_name('_4rR01T').text)
@@ -76,7 +76,7 @@ class Flipkart():
                 condition = False
             '''
         all_details = []
-        for i in tqdm(range(len(list_of_links[0:3]))):
+        for i in tqdm(range(len(list_of_links))):
             name_of_product = description_of_all[i]
             price = price_of_all[i]
             try:
@@ -128,7 +128,7 @@ class Amazon():
         description_of_all = []
         price_of_all = []
         condition = 1
-        while condition <= 1:
+        while condition <= 2:
             all_products_link = self.driver.find_elements_by_xpath('//div[@data-component-type="s-search-result"]')
             for link in all_products_link:
                 description_of_all.append(link.find_element_by_xpath('.//h2/a').text.strip())
@@ -146,7 +146,7 @@ class Amazon():
 
         all_details = []
         source = "Amazon"
-        for i in tqdm(range(len(list_of_links[0:3]))):
+        for i in tqdm(range(len(list_of_links))):
             name_of_product = description_of_all[i]
             price = price_of_all[i]
             category = user_search

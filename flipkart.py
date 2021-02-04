@@ -75,7 +75,7 @@ class Flipkart():
                 condition = False
             '''
         all_details = []
-        for i in tqdm(range(len(list_of_links[0:3]))):
+        for i in tqdm(range(len(list_of_links))):
             name_of_product = description_of_all[i]
             price = price_of_all[i]
             try:
@@ -142,7 +142,7 @@ class Amazon():
 
         all_details = []
         source = "Amazon"
-        for i in tqdm(range(len(list_of_links[0:3]))):
+        for i in tqdm(range(len(list_of_links))):
             name_of_product = description_of_all[i]
             price = price_of_all[i]
             category = user_search
