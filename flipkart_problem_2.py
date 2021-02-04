@@ -136,20 +136,39 @@ class Flipkart():
         time.sleep(1)
 
         if sort_type == 'Relevance':
-            self.driver.find_element_by_xpath("//div[@id='container']/div/div[3]/div[2]/div/div[2]/div/div/div/div[2]/div").click()
+            try:
+                self.driver.find_element_by_xpath("//div[@id='container']/div/div[3]/div[2]/div/div[2]/div/div/div/div[2]/div").click()
+            except:
+                pass
         elif sort_type == 'Popularity':
-            self.driver.find_element_by_xpath("//div[@id='container']/div/div[3]/div[2]/div/div[2]/div/div/div/div[2]/div[2]").click()
+            try:
+                self.driver.find_element_by_xpath("//div[@id='container']/div/div[3]/div[2]/div/div[2]/div/div/div/div[2]/div[2]").click()
+            except:
+                pass
         elif sort_type == 'Price -- Low to High':
-            self.driver.find_element_by_xpath("//div[@id='container']/div/div[3]/div[2]/div/div[2]/div/div/div/div[2]/div[3]").click()
+            try:
+                self.driver.find_element_by_xpath("//div[@id='container']/div/div[3]/div[2]/div/div[2]/div/div/div/div[2]/div[3]").click()
+            except:
+                pass
         elif sort_type == 'Price -- High to low':
-            self.driver.find_element_by_xpath("//div[@id='container']/div/div[3]/div[2]/div/div[2]/div/div/div/div[2]/div[4]").click()
+            try:
+                self.driver.find_element_by_xpath("//div[@id='container']/div/div[3]/div[2]/div/div[2]/div/div/div/div[2]/div[4]").click()
+            except:
+                pass
         elif sort_type == 'Newest First':
-            self.driver.find_element_by_xpath("//div[@id='container']/div/div[3]/div[2]/div/div[2]/div/div/div/div[2]/div[5]").click()
-
+            try:
+                self.driver.find_element_by_xpath("//div[@id='container']/div/div[3]/div[2]/div/div[2]/div/div/div/div[2]/div[5]").click()
+            except:
+                pass
         time.sleep(1)
         if exclude in ["Yes", "yes", "YES"]:
-            self.driver.find_element_by_xpath("//div[@id='container']/div/div[3]/div[2]/div/div/div/div/div/section[21]/div/div").click()
-            self.driver.find_element_by_xpath("//div[@id='container']/div/div[3]/div[2]/div/div/div/div/div/section[21]/div[2]/div/div/div/div/label/div").click()
+            try:
+                self.driver.find_element_by_xpath("//div[@id='container']/div/div[3]/div[2]/div/div/div/div/div/section[21]/div/div").click()
+                self.driver.find_element_by_xpath("//div[@id='container']/div/div[3]/div[2]/div/div/div/div/div/section[21]/div[2]/div/div/div/div/label/div").click()
+            except:
+                pass
+
+
         else:
             pass
         time.sleep(1)
@@ -219,6 +238,7 @@ class Flipkart():
             source = list1.get_property('alt')
             url = list_of_num_links[i]
             if self.driver.find_element_by_class_name('_36yFo0'):
+                self.driver.find_element_by_class_name('_36yFo0').clear()
                 self.driver.find_element_by_class_name('_36yFo0').click()
                 self.driver.find_element_by_class_name("_36yFo0").send_keys(pincode)
                 self.driver.find_element_by_class_name("_36yFo0").send_keys(Keys.ENTER)
@@ -237,73 +257,6 @@ class Flipkart():
             writer.writerows(all_details)
         print(list_of_links)
         print(len(list_of_links))
-
-    def filter(self):
-        driver = self.driver
-        driver.get("https://www.flipkart.com/")
-        driver.find_element_by_name("q").click()
-        driver.find_element_by_name("q").clear()
-        driver.find_element_by_name("q").send_keys("mobiles")
-        driver.find_element_by_name("q").send_keys(Keys.ENTER)
-        driver.find_element_by_xpath(
-            '//*[@id="container"]/div/div[3]/div[2]/div/div[1]/div/div[1]/div/section[2]/div[4]/div[1]/select').click()
-        Select(driver.find_element_by_xpath(
-            "//*[@id='container']/div/div[3]/div[2]/div/div/div/div/div/section[2]/div[4]/div/select")).select_by_visible_text(
-            u"₹2000")
-        driver.find_element_by_xpath(
-            "//*[@id='container']/div/div[3]/div[2]/div/div/div/div/div/section[2]/div[4]/div[3]/select").click()
-        Select(driver.find_element_by_xpath(
-            "//div[@id='container']/div/div[3]/div[2]/div/div/div/div/div/section[2]/div[4]/div[3]/select")).select_by_visible_text(
-            u"₹10000")
-        list_of_links = []
-        condition = 1
-        cat = self.driver.find_elements_by_class_name('TB_InB')[1]
-        b = cat.find_element_by_tag_name('a')
-        category = b.get_property('title')
-        while condition <= 1:
-            all_products_link = self.driver.find_elements_by_class_name('_2kHMtA')
-            for link in all_products_link:
-                a = link.find_element_by_tag_name('a')
-                list_of_links.append(a.get_property('href'))
-
-            try:
-                class_name = self.driver.find_element_by_class_name("yFHi8N")
-                next = class_name.find_elements_by_tag_name('a')[-1]
-                h = next.get_property('href')
-                self.driver.get(h)
-                condition += 1
-            except:
-                pass
-
-        all_details = []
-        for i in tqdm(list_of_links):
-            self.driver.get(i)
-            try:
-                name_of_product = self.driver.find_element_by_class_name('B_NuCI').text
-            except:
-                name_of_product = None
-            try:
-                price = self.driver.find_element_by_xpath(
-                    '//*[@id="container"]/div/div[3]/div[1]/div[2]/div[2]/div/div[3]/div[1]/div/div[1]').text
-            except:
-                price = None
-            try:
-                model = self.driver.find_elements_by_class_name('_21lJbe')[1].text
-            except:
-                model = None
-            try:
-                flip_class = self.driver.find_element_by_class_name('_3qX0zy')
-                list1 = flip_class.find_elements_by_tag_name('img')[0]
-                source = list1.get_property('alt')
-            except:
-                source = None
-            url = i
-            temp = [name_of_product, price, model, category, source, url]
-            all_details.append(temp)
-
-        with open('Flipkart_output.csv', 'w', newline='') as file:
-            writer = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC)
-            writer.writerows(all_details)
 
     def tearDown(self):
         self.driver.quit()
@@ -331,7 +284,7 @@ if __name__ == "__main__":
     pincode = input()
     if pincode is "" or len(pincode) < 6 or len(pincode) > 6:
         print("Entered a wrong pincode considering 400072 as a default pincode")
-        pincode = 400072
+        pincode = "400072"
 
     Flipkart = Flipkart()
     Flipkart.page_load(user_input)
