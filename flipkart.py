@@ -13,10 +13,10 @@ class Flipkart():
         GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
         CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
         chrome_options = webdriver.ChromeOptions()
-        #chrome_options.add_argument('--disable-gpu')
-        #chrome_options.add_argument('--no-sandbox')
-        #chrome_options.binary_location = GOOGLE_CHROME_PATH
-        self.driver = webdriver.Chrome(CHROMEDRIVER_PATH)
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.binary_location = GOOGLE_CHROME_PATH
+        self.driver = webdriver.Chrome(CHROMEDRIVER_PATH, chrome_options=chrome_options)
         self.url = 'https://www.flipkart.com'
         #self.driver = webdriver.Chrome("C:\Users\anupamtripathi\Downloads\Vishal\Flipkart-Amazon-automation\chromedriver.exe")
 
@@ -79,7 +79,6 @@ class Flipkart():
             for link in all_products_link:
                 a = link.find_element_by_tag_name('a')
                 list_of_links.append(a.get_property('href'))
-
             try:
                 class_name = self.driver.find_element_by_class_name("yFHi8N")
                 next = class_name.find_elements_by_tag_name('a')[-1]
