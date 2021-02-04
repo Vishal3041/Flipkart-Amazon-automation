@@ -11,7 +11,7 @@ class Flipkart():
 
     def __init__(self):
         self.url = 'https://www.flipkart.com'
-        self.driver = webdriver.Chrome("/Users/amittripathi/PycharmProjects/selenium_1/Drivers/chromedriver")
+        self.driver = webdriver.Chrome()
 
     def page_load(self, user_search):
         self.driver.get(self.url)
