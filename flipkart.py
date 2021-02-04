@@ -10,8 +10,15 @@ import time
 class Flipkart():
 
     def __init__(self):
+        GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+        CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.binary_location = GOOGLE_CHROME_PATH
+        self.driver = webdriver.Chrome(execution_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
         self.url = 'https://www.flipkart.com'
-        self.driver = webdriver.Chrome("https://sites.google.com/a/chromium.org/chromedriver/home")
+        #self.driver = webdriver.Chrome("C:\Users\anupamtripathi\Downloads\Vishal\Flipkart-Amazon-automation\chromedriver.exe")
 
     def page_load(self, user_search):
         self.driver.get(self.url)
